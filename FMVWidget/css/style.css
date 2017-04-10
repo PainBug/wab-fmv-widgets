@@ -1,0 +1,7 @@
+video::-webkit-media-controls {
+    overflow: hidden !important
+}
+video::-webkit-media-controls-enclosure {
+    width: calc(100% + 32px);
+    margin-left: auto;
+}
