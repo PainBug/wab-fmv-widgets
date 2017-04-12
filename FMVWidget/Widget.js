@@ -30,12 +30,13 @@ define(['dojo/_base/declare', 'jimu/BaseWidget',
 
     return declare([BaseWidget, _WidgetsInTemplateMixin], {
       templateString: template,
-      plane_icon: require.toUrl('widgets/samplewidgets/FMVWidget/images/plane_blue.png'),
+      plane_icon: require.toUrl('widgets/FMV/images/plane_blue.png'),
 
        postCreate: function() {
         this.inherited(arguments);
         console.log('postCreate');
         plane = this.plane_icon;
+        console.log(this.plane_icon);
         map = this.map;
 
         url = 'http://52.23.194.215/';
@@ -79,9 +80,6 @@ define(['dojo/_base/declare', 'jimu/BaseWidget',
         },
         _getData: function(){
             data = [];
-            console.log(url);
-            console.log(user);
-            console.log(pass);
             xhr(url + 'Segments', {
                 headers: {
                     "Authorization": "Basic " + base64.encode(this._toByteArray(user + ":" + pass))
@@ -93,9 +91,6 @@ define(['dojo/_base/declare', 'jimu/BaseWidget',
                     data.push({id:r._id, label: r.name, value: url + 'videos/' + r.media[0].relativeUrl,
                     date: r.startTime, mission_id: r.missionId});
                 });
-                console.log(data);
-                
-
                 this._initSelect(data);
                 this._setFirstVideo();
             }));
@@ -195,7 +190,6 @@ define(['dojo/_base/declare', 'jimu/BaseWidget',
             })
         },
         _createGraphicLayers: function () {
-            console.log('graphic layers');
             //plain
             pointSymbolFMV = new PictureMarkerSymbol(plane, 40, 40);
             pointGraphicsFMV = new GraphicsLayer({
